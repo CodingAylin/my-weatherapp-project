@@ -39,3 +39,7 @@ li {
   vertical-align: text-top;
   cursor: pointer;
 }
+
+.code-link-name {
+  text-align: left;
+}
