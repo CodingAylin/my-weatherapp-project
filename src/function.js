@@ -36,9 +36,23 @@ cityForm.addEventListener("submit", search);
 
 function showWeather(response) {
   let city = document.querySelector("#cityName");
+  let descriptionElement = document.querySelector("#description");
   let currentTemp = document.querySelector("#current-temperature");
-  city.innerHTML = response.data.name;
+  let currentHumidity = document.querySelector("#humidity-element");
+  let currentWindSpeed = document.querySelector("#wind-element");
+  let iconElement = document.querySelector("#icon");
+
   celsiusTemperature = response.data.main.temp;
+  city.innerHTML = response.data.name;
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  currentHumidity.innerHTML = Math.round(response.data.main.humidity);
+  currentWindSpeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
   currentTemp.innerHTML = Math.round(celsiusTemperature);
 }
 

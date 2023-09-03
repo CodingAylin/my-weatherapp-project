@@ -19,7 +19,7 @@ li {
   padding: 10px 20px;
 }
 
-.participation-wind {
+.humidity-wind {
   position: relative;
   left: 270px;
   bottom: 48px;
@@ -30,7 +30,11 @@ li {
   font-size: 40px;
   position: relative;
   bottom: 35px;
-  width: 170px;
+  width: 220px;
+}
+
+.weather-description {
+  text-transform: capitalize;
 }
 
 .celcius,
