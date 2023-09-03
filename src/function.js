@@ -38,7 +38,8 @@ function showWeather(response) {
   let city = document.querySelector("#cityName");
   let currentTemp = document.querySelector("#current-temperature");
   city.innerHTML = response.data.name;
-  currentTemp.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemperature = response.data.main.temp;
+  currentTemp.innerHTML = Math.round(celsiusTemperature);
 }
 
 function retrievePosition(position) {
@@ -60,23 +61,26 @@ showCurrent();
 
 // current weather end
 
-// let celcius = document.querySelector("#celcius");
-// let fahrenheit = document.querySelector("#fahrenheit");
+let celcius = document.querySelector("#celcius");
+let fahrenheit = document.querySelector("#fahrenheit");
 
-// let currentTemp = document.querySelector("#current-temperature");
+let currentTemp = document.querySelector("#current-temperature");
 
-// function showCelcius(event) {
-//  event.preventDefault();
-//  currentTemp.innerHTML = 19;
-// }
+function showFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  currentTemp.innerHTML = Math.round(fahrenheitTemperature);
+}
 
-// celcius.addEventListener("click", showCelcius);
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  currentTemp.innerHTML = Math.round(celsiusTemperature);
+}
 
-// function showFahrenheit (event) {
-//  event.preventDefault();
-//  currentTemp.innerHTML = 66;
-// }
+let celsiusTemperature = null;
 
-// fahrenheit.addEventListener("click", showFahrenheit);
+fahrenheit.addEventListener("click", showFahrenheit);
 
-// celcius/fahrenheit end
+celcius.addEventListener("click", displayCelsiusTemperature);
+
+// unit conversion end
