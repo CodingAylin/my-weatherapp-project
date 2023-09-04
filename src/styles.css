@@ -47,3 +47,16 @@ li {
 .code-link-name {
   text-align: left;
 }
+
+.weather-forecast-day {
+  font-size: 19px;
+}
+
+.weather-forecast-temperature-max,
+.weather-forecast-temperature-min {
+  font-size: 15px;
+}
+
+.weather-forecast-temperature-min {
+  opacity: 0.8;
+}

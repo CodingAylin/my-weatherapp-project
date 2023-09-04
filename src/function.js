@@ -17,6 +17,10 @@ let days = [
 ];
 let day = days[now.getDay()];
 
+if (minutes < 10) {
+  minutes = "0" + minutes;
+}
+
 dateTime.innerHTML = `${day}, ${hours}:${minutes}`;
 
 // date ending
@@ -98,3 +102,7 @@ fahrenheit.addEventListener("click", showFahrenheit);
 celcius.addEventListener("click", displayCelsiusTemperature);
 
 // unit conversion end
+
+// 1) to build the HTML and CSS for forecast
+// 2) integrate API
+// 3) To replace dummy content with real data
