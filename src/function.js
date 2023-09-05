@@ -46,6 +46,8 @@ function showWeather(response) {
   let currentWindSpeed = document.querySelector("#wind-element");
   let iconElement = document.querySelector("#icon");
 
+  displayForecast();
+
   celsiusTemperature = response.data.main.temp;
   city.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].description;
@@ -103,6 +105,19 @@ celcius.addEventListener("click", displayCelsiusTemperature);
 
 // unit conversion end
 
-// 1) to build the HTML and CSS for forecast
-// 2) integrate API
-// 3) To replace dummy content with real data
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  forecastElement.innerHTML = `
+        <div class="row">
+          <div class="col-2">            
+            <span class="weather-forecast-day">Mon</span> 
+            <br />
+            <i class="fa-solid fa-sun"></i> 
+            <br />
+            <span class="weather-forecast-temperature-max">26° | </span>
+            <span class="weather-forecast-temperature-min">15°</span>
+          </div>
+        </div>
+        `;
+}
