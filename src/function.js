@@ -23,13 +23,13 @@ if (minutes < 10) {
 
 dateTime.innerHTML = `${day}, ${hours}:${minutes}`;
 
-// date ending
+// current location date ending
 
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-text-input");
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=metric`;
+  let apiKey = "22fba54b54f68f4903et511c0f6b4dof";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showWeather);
 }
 
@@ -37,6 +37,14 @@ let cityForm = document.querySelector("#search-city-form");
 cityForm.addEventListener("submit", search);
 
 // change city ending
+
+function getDailyForecast (coordinates) {
+  let apiKey = "22fba54b54f68f4903et511c0f6b4dof";
+  let apiUrl= `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+// forecast for next days ending
 
 function showWeather(response) {
   let city = document.querySelector("#cityName");
@@ -46,27 +54,22 @@ function showWeather(response) {
   let currentWindSpeed = document.querySelector("#wind-element");
   let iconElement = document.querySelector("#icon");
 
-  displayForecast();
-
-  celsiusTemperature = response.data.main.temp;
-  city.innerHTML = response.data.name;
-  descriptionElement.innerHTML = response.data.weather[0].description;
-  currentHumidity.innerHTML = Math.round(response.data.main.humidity);
-  currentWindSpeed.innerHTML = Math.round(response.data.wind.speed * 3.6);
-  iconElement.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
-
+  celsiusTemperature = response.data.temperature.current;
+  city.innerHTML = response.data.city;
+  descriptionElement.innerHTML = response.data.condition.description;
+  currentHumidity.innerHTML = Math.round(response.data.temperature.humidity);
+  currentWindSpeed.innerHTML = Math.round(response.data.wind.speed);
+  iconElement.src = response.data.condition.icon_url;
   currentTemp.innerHTML = Math.round(celsiusTemperature);
+  
+  getDailyForecast(response.data.coordinates);
 }
 
-function retrievePosition(position) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+function retrievePosition(coordinates) {
+  let apiKey = "22fba54b54f68f4903et511c0f6b4dof";
+  let lat = coordinates.coords.latitude;
+  let lon = coordinates.coords.longitude;
+  let url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
   axios.get(url).then(showWeather);
 }
 
@@ -105,19 +108,29 @@ celcius.addEventListener("click", displayCelsiusTemperature);
 
 // unit conversion end
 
-function displayForecast() {
+function displayForecast(response) {
+
   let forecastElement = document.querySelector("#forecast");
 
-  forecastElement.innerHTML = `
-        <div class="row">
-          <div class="col-2">            
-            <span class="weather-forecast-day">Mon</span> 
-            <br />
-            <i class="fa-solid fa-sun"></i> 
-            <br />
-            <span class="weather-forecast-temperature-max">26° | </span>
-            <span class="weather-forecast-temperature-min">15°</span>
-          </div>
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col-2">
+        <div class="weather-forecast-date">${day}</div>
+        <i class="fa-solid fa-sun"></i> 
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> 18° </span>
+          <span class="weather-forecast-temperature-min"> 12° </span>
         </div>
-        `;
+      </div>
+  `;
+  });
+
+forecastHTML = forecastHTML + `</div>`;
+forecastElement.innerHTML = forecastHTML;
+console.log(response.data);
 }
