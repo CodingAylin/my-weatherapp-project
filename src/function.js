@@ -106,31 +106,58 @@ fahrenheit.addEventListener("click", showFahrenheit);
 
 celcius.addEventListener("click", displayCelsiusTemperature);
 
-// unit conversion end
+// unit conversion for current weather end
+
+function formatForecastDay (timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days =
+  [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
+
+  return days[day]; 
+}
 
 function displayForecast(response) {
 
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
-
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6){
     forecastHTML =
       forecastHTML +
       `
       <div class="col-2">
-        <div class="weather-forecast-date">${day}</div>
-        <i class="fa-solid fa-sun"></i> 
+        <div class="weather-forecast-date">${formatForecastDay(forecastDay.time)}</div>
+        <img 
+        src=${forecastDay.condition.icon_url}
+        alt =""
+        width=""
+        >
         <div class="weather-forecast-temperatures">
-          <span class="weather-forecast-temperature-max"> 18° </span>
-          <span class="weather-forecast-temperature-min"> 12° </span>
+          <span class="weather-forecast-temperature-max">${Math.round(forecastDay.temperature.maximum)}°</span>
+          <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temperature.minimum)}°</span>
         </div>
       </div>
   `;
-  });
+}
+});
 
 forecastHTML = forecastHTML + `</div>`;
 forecastElement.innerHTML = forecastHTML;
-console.log(response.data);
+
+console.log(response.data.daily);
+
 }
+
+// forecast for next days end
