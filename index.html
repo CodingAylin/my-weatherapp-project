@@ -12,46 +12,76 @@
     <title>My Weatherapp</title>
 </head>
 <body>
-    <div class="container">
-        <div class="card" style="width: 35rem;">
+<div class="container"> 
+<div class="weather">
+       
 
     <form id="search-city-form">
+       <div class="row">
+        <div class="col-9">
         <input type="text" 
         placeholder="Search for a city"
         autocomplete="off"
         autofocus="on"
         id="search-text-input"
+        class="form-control search-input"
         />
-        <input type="submit" value="Search"/>
-        <input type="submit" value="Current" id="current-weather-button"/>
+        </div>
+    <div class="col-3">
+        <input type="submit" value="Search" class="btn btn-primary"/>
+        <input type="submit" value="Current" id="current-weather-button" class="btn btn-primary"/>
+    </div> 
+    </div> 
     </form>
-    <br />
+
+    <div class="weather-info">
+    <div class="row">
+        <div class="col-6">
     <h1 id="cityName"></h1>
-
-    <span class="day-time"></span> 
+    <ul>
+    <li>
+    <span class="day-time"></span>,
     <span id="description" class="weather-description"></span>
+    </li>
+    <li>
+    </li>
+    <li class=>
+        Humidity: <strong><span id="humidity-element" class="humidity"></span>%</strong>
+    </li>
+    <li>
+        Wind: <strong><span id="wind-element" class="wind"></span> km/h</strong>
+    </li>
+    </ul>
+    </div> 
+    <div class="col-lg-6 col-md-6 col-sm-8">
 
-    <div class="humidity-wind">
-        Humidity: <span id="humidity-element"></span>%
-        <br />
-        Wind: <span id="wind-element"></span> km/h
-    </div>
-    <span class="current-weather">
-    <img src="" alt="clear" id="icon" class="weather-icon"/>
+        <div class="temperature-container d-flex justify-content-end">
 
-        <span id="current-temperature"></span> 
+        <img src="" alt="clear" id="icon" class="weather-icon"/>
+
+        <div>
+        <span id="current-temperature" class="temperature"></span> 
         <span class="celcius" id="celcius">°C | </span>
         <span class="fahrenheit" id="fahrenheit">°F</span>
-    </span>
-    <div class="weather-forecast" id="forecast"></div>
-        </div>
-            <div class="code-name-wrapper">
-            <span class="code-name-link">
-            <a href="https://github.com/CodingAylin/my-weatherapp-project/tree/main">Open-source code</a> 
+    </div> 
+
+    </div> 
+
+
+    </div> 
+
+    </div>
+    </div>
+    <div class="forecast-wrapper">
+    <div class="weather-forecast" id="forecast">
+    </div> 
+        <footer>   
+               <a href="https://github.com/CodingAylin/my-weatherapp-project/tree/main">Open-source code</a> 
              by  
             <a href="https://www.shecodes.io/graduates/83541-aylin-g">Aylin Gürel</a></span>
-        </div>
-
+        </footer>
+</div>
+</div>
 </body>
 <script src="https://kit.fontawesome.com/451e41ec70.js" crossorigin="anonymous"></script>
 <script src="src/function.js"></script>

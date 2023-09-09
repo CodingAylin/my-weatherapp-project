@@ -1,10 +1,10 @@
-let now = new Date();
+function showCurrentTime (showTime) {
 
 let dateTime = document.querySelector("span.day-time");
 
-let date = now.getDate();
-let hours = now.getHours();
-let minutes = now.getMinutes();
+// let date = showTime.getDate();
+let hours = showTime.getHours();
+let minutes = showTime.getMinutes();
 
 let days = [
   "Sunday",
@@ -15,13 +15,19 @@ let days = [
   "Friday",
   "Saturday",
 ];
-let day = days[now.getDay()];
+let day = days[showTime.getDay()];
 
 if (minutes < 10) {
   minutes = "0" + minutes;
 }
 
-dateTime.innerHTML = `${day}, ${hours}:${minutes}`;
+if (hours < 10) {
+  hours = "0" + hours;
+}
+
+dateTime.innerHTML = `${day} ${hours}:${minutes}`;
+
+}
 
 // current location date ending
 
@@ -61,6 +67,9 @@ function showWeather(response) {
   currentWindSpeed.innerHTML = Math.round(response.data.wind.speed);
   iconElement.src = response.data.condition.icon_url;
   currentTemp.innerHTML = Math.round(celsiusTemperature);
+
+  let showTime = new Date (response.data.time * 1000);
+  showCurrentTime(showTime);
   
   getDailyForecast(response.data.coordinates);
 }
@@ -80,7 +89,6 @@ function showCurrent() {
 let currentButton = document.querySelector("#current-weather-button");
 currentButton.addEventListener("click", showCurrent);
 
-showCurrent();
 
 // current weather end
 
@@ -122,7 +130,9 @@ function formatForecastDay (timestamp) {
     "Sat",
   ];
 
-  return days[day]; 
+  return days[day];
+  
+  console.log()
 }
 
 function displayForecast(response) {
@@ -161,3 +171,6 @@ console.log(response.data.daily);
 }
 
 // forecast for next days end
+
+showCurrent();
+showDate();
