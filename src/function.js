@@ -92,27 +92,27 @@ currentButton.addEventListener("click", showCurrent);
 
 // current weather end
 
-let celcius = document.querySelector("#celcius");
-let fahrenheit = document.querySelector("#fahrenheit");
+//let celcius = document.querySelector("#celcius");
+// let fahrenheit = document.querySelector("#fahrenheit");
 
-let currentTemp = document.querySelector("#current-temperature");
+// let currentTemp = document.querySelector("#current-temperature");
 
-function showFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  currentTemp.innerHTML = Math.round(fahrenheitTemperature);
-}
+// function showFahrenheit(event) {
+ // event.preventDefault();
+  //let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  //currentTemp.innerHTML = Math.round(fahrenheitTemperature);
+// }
 
-function displayCelsiusTemperature(event) {
-  event.preventDefault();
-  currentTemp.innerHTML = Math.round(celsiusTemperature);
-}
+// function displayCelsiusTemperature(event) {
+//  event.preventDefault();
+ // currentTemp.innerHTML = Math.round(celsiusTemperature);
+// }
 
-let celsiusTemperature = null;
+// let celsiusTemperature = null;
 
-fahrenheit.addEventListener("click", showFahrenheit);
+// fahrenheit.addEventListener("click", showFahrenheit);
 
-celcius.addEventListener("click", displayCelsiusTemperature);
+//celcius.addEventListener("click", displayCelsiusTemperature);
 
 // unit conversion for current weather end
 
@@ -131,8 +131,6 @@ function formatForecastDay (timestamp) {
   ];
 
   return days[day];
-  
-  console.log()
 }
 
 function displayForecast(response) {
@@ -165,8 +163,6 @@ function displayForecast(response) {
 
 forecastHTML = forecastHTML + `</div>`;
 forecastElement.innerHTML = forecastHTML;
-
-console.log(response.data.daily);
 
 }
 
