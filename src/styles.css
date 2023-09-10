@@ -99,3 +99,10 @@ footer {
   margin-bottom: 0px;
 }
 
+
+.btn-primary:hover {
+  color: #5c715e; 
+  background-color: #f2f9f1;
+  border-color:#f2f9f1;
+  transition: all 0.5s;
+}

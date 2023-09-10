@@ -169,4 +169,5 @@ forecastElement.innerHTML = forecastHTML;
 // forecast for next days end
 
 showCurrent();
-showDate();
+let now = new Date ("now");
+showCurrentTime(now);
